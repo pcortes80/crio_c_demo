@@ -8,16 +8,18 @@
 #include <stdlib.h>
 
 // Project headers
-#include "\c_api\NiFpga_FPGA_code.h"
+// #include "NiFpga_FPGA_code.h"
 
-// Initialize the FPGA interface 
-NiFpga_Status status = NiFpga_Initialize();
+int main(){
+
+    // Initialize the FPGA interface 
+ /*    NiFpga_Status status = NiFpga_Initialize();
     if (NiFpga_IsNotError(status)) {
         NiFpga_Session session;
-        string bitfile = NiFpga_FPGA_code_Bitfile;
+        // string bitfile = NiFpga_FPGA_code_Bitfile;
         // Open a session and download the bitstream
         NiFpga_MergeStatus(&status,
-                           NiFpga_Open(bitfile.c_str(),
+                           NiFpga_Open(NiFpga_FPGA_code_Bitfile,
                            NiFpga_FPGA_code_Signature,
                            "RIO0",
                            NiFpga_OpenAttribute_NoRun, &session));
@@ -38,8 +40,6 @@ NiFpga_Status status = NiFpga_Initialize();
             int16_t input[SIZE];  /// input from FPGA FIFO_B
 
             int x = 0;
-            while (x < 10)
-            {
                 // Read UserSwitches
                 NiFpga_MergeStatus(&status, NiFpga_ReadBool(session, NiFpga_FPGA_code_IndicatorBool_UserSwitch0,&userSw0));
                 //NiFpga_MergeStatus(&status, NiFpga_ReadBool(session, NiFpga_FPGA_code_IndicatorBool_UserSwitch1,&userSw1));
@@ -50,7 +50,7 @@ NiFpga_Status status = NiFpga_Initialize();
                 printf("userSw0=%d",(int)userSw0);
 
                 x++;
-                delay(1000):
+                delay(1000);
                                    
             }
             // Close the session to the FPGA VI
@@ -58,11 +58,13 @@ NiFpga_Status status = NiFpga_Initialize();
         }
         // Close the FPGA interface.
         NiFpga_MergeStatus(&status, NiFpga_Finalize());
-    }    
+    }     */
     // check if anything went wrong
-    if (NiFpga_IsError(status)){
+/*     if (NiFpga_IsError(status)){
         printf("Error\n");
         printf("Press <Enter> to quit...\n");
         getchar();
-    }
-    return status;
+    } */
+    // return status;
+    return 0;
+}
