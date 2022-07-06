@@ -28,6 +28,10 @@ int main(){
             // Run the FPGA VI on the target
             NiFpga_MergeStatus(&status, NiFpga_Run(session, 0));
 
+            /* Reset UserLED0 */
+            NiFpga_MergeStatus(&status, NiFpga_WriteBool(session, NiFpga_mainFPGA_ControlBool_UserLED0,0));
+            sleep(2);
+
             // UserSwitches Initialization
             NiFpga_Bool userSw0 = 0;
             NiFpga_Bool userSw1 = 0;
@@ -38,6 +42,9 @@ int main(){
             uint8_t inputSwitches[SIZE]; /// input form FPGA switches
             int16_t output[SIZE]; /// output to FPGA FIFO_A
             int16_t input[SIZE];  /// input from FPGA FIFO_B
+
+            /* LEDO = on */
+            NiFpga_MergeStatus(&status, NiFpga_WriteBool(session, NiFpga_mainFPGA_ControlBool_UserLED0,1));
 
             int x = 0;
             while (x < 10)
@@ -58,9 +65,14 @@ int main(){
             // Close the session to the FPGA VI
             NiFpga_MergeStatus(&status, NiFpga_Close(session, 0));
         }
+
+        /* LEDO = off */
+        NiFpga_MergeStatus(&status, NiFpga_WriteBool(session, NiFpga_mainFPGA_ControlBool_UserLED0,0));
+
         // Close the FPGA interface.
         NiFpga_MergeStatus(&status, NiFpga_Finalize());
     }    
+     
     // check if anything went wrong
     if (NiFpga_IsError(status)){
         printf("Error\n");
