@@ -8,10 +8,12 @@
 #include <stdlib.h>
 
 // Project headers
-#include "\c_api\NiFpga_FPGA_code.h"
+#include "NiFpga_FPGA_code.h"
 
-// Initialize the FPGA interface 
-NiFpga_Status status = NiFpga_Initialize();
+int main(){
+
+    // Initialize the FPGA interface 
+    NiFpga_Status status = NiFpga_Initialize();
     if (NiFpga_IsNotError(status)) {
         NiFpga_Session session;
         string bitfile = NiFpga_FPGA_code_Bitfile;
@@ -50,7 +52,7 @@ NiFpga_Status status = NiFpga_Initialize();
                 printf("userSw0=%d",(int)userSw0);
 
                 x++;
-                delay(1000):
+                delay(1000);
                                    
             }
             // Close the session to the FPGA VI
@@ -66,3 +68,4 @@ NiFpga_Status status = NiFpga_Initialize();
         getchar();
     }
     return status;
+}
