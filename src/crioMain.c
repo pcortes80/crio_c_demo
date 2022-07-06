@@ -51,12 +51,12 @@ int main(){
             {
                 // Read UserSwitches
                 NiFpga_MergeStatus(&status, NiFpga_ReadBool(session, NiFpga_mainFPGA_IndicatorBool_UserSwitch0,&userSw0));
-                //NiFpga_MergeStatus(&status, NiFpga_ReadBool(session, NiFpga_mainFPGA_IndicatorBool_UserSwitch1,&userSw1));
-                //NiFpga_MergeStatus(&status, NiFpga_ReadBool(session, NiFpga_mainFPGA_IndicatorBool_UserSwitch2,&userSw2));
-                //NiFpga_MergeStatus(&status, NiFpga_ReadBool(session, NiFpga_mainFPGA_IndicatorBool_UserSwitch3,&userSw3));   
+                NiFpga_MergeStatus(&status, NiFpga_ReadBool(session, NiFpga_mainFPGA_IndicatorBool_UserSwitch1,&userSw1));
+                NiFpga_MergeStatus(&status, NiFpga_ReadBool(session, NiFpga_mainFPGA_IndicatorBool_UserSwitch2,&userSw2));
+                NiFpga_MergeStatus(&status, NiFpga_ReadBool(session, NiFpga_mainFPGA_IndicatorBool_UserSwitch3,&userSw3));   
             
                 //cout << "userSw0=" << ((userSw0) ? "t" : "f") << " " << hex << (int)userSw0;
-                printf("iteration = %d\t userSw0 = %d\n",x, (int)userSw0);
+                printf("iteration = %d\t userSw0 = %d\t userSw1 = %d\t userSw2 = %d\t userSw3 = %d\n", x, (int)userSw0, (int)userSw1, (int)userSw2, (int)userSw3);
 
                 x++;
                 sleep(1);
