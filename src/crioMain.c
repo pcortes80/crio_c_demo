@@ -56,19 +56,19 @@ int main(){
                 //NiFpga_MergeStatus(&status, NiFpga_ReadBool(session, NiFpga_mainFPGA_IndicatorBool_UserSwitch3,&userSw3));   
             
                 //cout << "userSw0=" << ((userSw0) ? "t" : "f") << " " << hex << (int)userSw0;
-                printf("iteration = %d/t userSw0 = %d/n",x, (int)userSw0);
+                printf("iteration = %d\t userSw0 = %d\n",x, (int)userSw0);
 
                 x++;
                 sleep(1);
                                                    
             }
+            /* LEDO = off */
+            NiFpga_MergeStatus(&status, NiFpga_WriteBool(session, NiFpga_mainFPGA_ControlBool_UserLED0,0));
+
             // Close the session to the FPGA VI
             NiFpga_MergeStatus(&status, NiFpga_Close(session, 0));
         }
-
-        /* LEDO = off */
-        NiFpga_MergeStatus(&status, NiFpga_WriteBool(session, NiFpga_mainFPGA_ControlBool_UserLED0,0));
-
+        
         // Close the FPGA interface.
         NiFpga_MergeStatus(&status, NiFpga_Finalize());
     }    
