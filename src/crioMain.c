@@ -8,7 +8,7 @@
 #include <stdlib.h>
 
 // Project headers
-#include "NiFpga_FPGA_code.h"
+#include "../include/NiFpga_mainFPGA.h"
 
 int main(){
 
@@ -16,11 +16,11 @@ int main(){
     NiFpga_Status status = NiFpga_Initialize();
     if (NiFpga_IsNotError(status)) {
         NiFpga_Session session;
-        string bitfile = NiFpga_FPGA_code_Bitfile;
+        // string bitfile = NiFpga_mainFPGA_Bitfile;
         // Open a session and download the bitstream
         NiFpga_MergeStatus(&status,
-                           NiFpga_Open(bitfile.c_str(),
-                           NiFpga_FPGA_code_Signature,
+                           NiFpga_Open(NiFpga_mainFPGA_Bitfile,
+                           NiFpga_mainFPGA_Signature,
                            "RIO0",
                            NiFpga_OpenAttribute_NoRun, &session));
  
@@ -36,23 +36,23 @@ int main(){
 
             const int SIZE = 256; /// size of FIFOs
             uint8_t inputSwitches[SIZE]; /// input form FPGA switches
-            int16_t output[SIZE] = {0}; /// output to FPGA FIFO_A
+            int16_t output[SIZE]; /// output to FPGA FIFO_A
             int16_t input[SIZE];  /// input from FPGA FIFO_B
 
             int x = 0;
             while (x < 10)
             {
                 // Read UserSwitches
-                NiFpga_MergeStatus(&status, NiFpga_ReadBool(session, NiFpga_FPGA_code_IndicatorBool_UserSwitch0,&userSw0));
-                //NiFpga_MergeStatus(&status, NiFpga_ReadBool(session, NiFpga_FPGA_code_IndicatorBool_UserSwitch1,&userSw1));
-                //NiFpga_MergeStatus(&status, NiFpga_ReadBool(session, NiFpga_FPGA_code_IndicatorBool_UserSwitch2,&userSw2));
-                //NiFpga_MergeStatus(&status, NiFpga_ReadBool(session, NiFpga_FPGA_code_IndicatorBool_UserSwitch3,&userSw3));   
+                NiFpga_MergeStatus(&status, NiFpga_ReadBool(session, NiFpga_mainFPGA_IndicatorBool_UserSwitch0,&userSw0));
+                //NiFpga_MergeStatus(&status, NiFpga_ReadBool(session, NiFpga_mainFPGA_IndicatorBool_UserSwitch1,&userSw1));
+                //NiFpga_MergeStatus(&status, NiFpga_ReadBool(session, NiFpga_mainFPGA_IndicatorBool_UserSwitch2,&userSw2));
+                //NiFpga_MergeStatus(&status, NiFpga_ReadBool(session, NiFpga_mainFPGA_IndicatorBool_UserSwitch3,&userSw3));   
             
                 //cout << "userSw0=" << ((userSw0) ? "t" : "f") << " " << hex << (int)userSw0;
                 printf("userSw0=%d",(int)userSw0);
 
                 x++;
-                delay(1000);
+                sleep(1);
                                    
             }
             // Close the session to the FPGA VI
