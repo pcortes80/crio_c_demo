@@ -99,7 +99,7 @@ int main(){
                 /* print each FIFO element's value */
                 printf("Input=\t");
                 for (j = 0; j < SIZE; ++j) {
-                    printf("%d\t", j, input[j] );
+                    printf("%d\t", input[j]);
                 }                            
                 printf("\n");
 
