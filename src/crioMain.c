@@ -6,6 +6,7 @@
 // System headers
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 
 // Project headers
 #include "../include/NiFpga_mainFPGA.h"
@@ -56,6 +57,9 @@ int main(){
             
                 printf("iteration = %d\t userSw0 = %d\t userSw1 = %d\t userSw2 = %d\t userSw3 = %d\n", x, (int)userSw0, (int)userSw1, (int)userSw2, (int)userSw3);
 
+                output[0] = 123;
+                printf("output = %d.\n", output);
+
                 // copy FIFO data to FPGA FIFO_A
                 NiFpga_WriteFifoI16(session, 
                                             NiFpga_mainFPGA_HostToTargetFifoI16_FIFO_A,
@@ -72,6 +76,8 @@ int main(){
                                             NiFpga_InfiniteTimeout, 
                                             NULL);
 
+                printf("input = %d.\n", input);
+                
                 /*char str = " input=";
                 for (int j = 0; j < SIZE; ++j) {
                     str += to_string(input[j]) + " ";
