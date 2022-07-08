@@ -69,6 +69,7 @@ int main(){
                 output[i] = i + 10; /* set element at location i to i + 1 */
             }
             printf("\n");
+            sleep(2);
 
             // copy FIFO data to FPGA FIFO_A
             NiFpga_WriteFifoI16(session, 
@@ -91,7 +92,9 @@ int main(){
             for (j = 0; j < SIZE; j++ ) {
                 printf("%d\t", j, input[j] );
             }                            
-            printf("\n");    
+            printf("\n");
+            sleep(2);    
+        
         }
 
             /* LEDO = off */
@@ -99,7 +102,7 @@ int main(){
             sleep(1);
 
             /* Bye */
-            printf("Good bye.");
+            printf("Good bye.\n");
 
             // Close the session to the FPGA VI
             NiFpga_Close(session, 0);
