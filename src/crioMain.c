@@ -69,6 +69,7 @@ int main(){
                 int i,j;
 
                 /* put identifiable values in the output buffer */
+                /*
                 printf("Output=\t");
                 for (j = 1; j < SIZE; ++j) { 
                     output[j] = output[j-1] + 1;
@@ -76,6 +77,8 @@ int main(){
                 }
                 printf("\n");
 
+                */
+               
                 // copy FIFO data to FPGA FIFO_A
                 NiFpga_WriteFifoI16(session, 
                                             NiFpga_mainFPGA_HostToTargetFifoI16_FIFO_A,
