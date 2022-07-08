@@ -13,6 +13,10 @@
 
 int main(){
 
+    /* Wellcome message */
+    printf("Turn UserSwitch0 ON and Press <Enter> to begin...\n");
+    getchar(); 
+
     // Initialize the FPGA interface 
     NiFpga_Status status = NiFpga_Initialize();
     if (NiFpga_IsNotError(status)) {
@@ -81,8 +85,6 @@ int main(){
                 }
                 printf("\n");
 
-                //sleep(1);
-
                 // copy FIFO data to FPGA FIFO_A
                 NiFpga_WriteFifoI16(session, 
                                             NiFpga_mainFPGA_HostToTargetFifoI16_FIFO_A,
@@ -98,6 +100,7 @@ int main(){
                                             SIZE, 
                                             NiFpga_InfiniteTimeout, 
                                             NULL);
+
 
                 /* print each FIFO element's value */
                 printf("Input=\t");
