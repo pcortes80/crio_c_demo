@@ -62,14 +62,14 @@ int main(){
 
             int i,j;
                 
-            /* initialize elements of FIFO */         
+            /* initialize elements of FIFO_A buffer */         
             printf("Output=\t");
             for (i = 0; i < SIZE; i++) {
                 output[i] = i + 10; /* set element at location i to i + 1 */
                 printf("%d\t", output[i]);
             }
             printf("\n");
-            sleep(2);
+            sleep(1);
 
             // copy FIFO data to FPGA FIFO_A
             NiFpga_WriteFifoI16(session, 
@@ -93,7 +93,7 @@ int main(){
                 printf("%d\t", j, input[j] );
             }                            
             printf("\n");
-            sleep(2);    
+            sleep(1);    
         
         }
 
