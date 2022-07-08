@@ -57,8 +57,18 @@ int main(){
             
                 printf("iteration = %d\t userSw0 = %d\t userSw1 = %d\t userSw2 = %d\t userSw3 = %d\n", x, (int)userSw0, (int)userSw1, (int)userSw2, (int)userSw3);
 
-                output[0] = 123;
-                printf("output = %d.\n", output);
+                //int n[10]; /* n is an array of 10 integers */
+                int i,j;
+                
+                /* initialize elements of array n to 0 */         
+                for (i = 0; i < 10; i++) {
+                    output[i] = i + 100; /* set element at location i to i + 100 */
+                }
+                
+                /* output each array element's value */
+                for (j = 0; j < 10; j++ ) {
+                    printf("Output Element[%d] = %d\n", j, output[j] );
+                }
 
                 // copy FIFO data to FPGA FIFO_A
                 NiFpga_WriteFifoI16(session, 
@@ -76,8 +86,10 @@ int main(){
                                             NiFpga_InfiniteTimeout, 
                                             NULL);
 
-                printf("input = %d.\n", input);
-                
+                /* output each array element's value */
+                for (j = 0; j < 10; j++ ) {
+                    printf("Input Element[%d] = %d\n", j, input[j] );
+                }                
                 /*char str = " input=";
                 for (int j = 0; j < SIZE; ++j) {
                     str += to_string(input[j]) + " ";
