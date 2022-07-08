@@ -46,7 +46,7 @@ int main(){
             NiFpga_WriteBool(session, NiFpga_mainFPGA_ControlBool_UserLED0,1);
 
             int x = 0;
-            while (x < 10)
+            while (x < 1)
             {
                 /*
                 // Read UserSwitches
@@ -61,10 +61,12 @@ int main(){
                 int i,j;
                 
                 /* initialize elements of FIFO */         
+                printf("Output= ");
                 for (i = 0; i < SIZE; i++) {
-                    printf("Output Element[%d] = %d\n", i, output[i]);
+                    printf("%d\t", i, output[i]);
                     output[i] = i + 1; /* set element at location i to i + 1 */
                 }
+                printf("\n");
                 
                 
                 /* output each array element's value */
@@ -91,9 +93,12 @@ int main(){
                                             NULL);
 
                 /* print each FIFO element's value */
+                printf("Input=");
                 for (j = 0; j < SIZE; j++ ) {
-                    printf("Input Element[%d] = %d\n", j, input[j] );
-                }                
+                    printf("%d\t", j, input[j] );
+                }                            
+                printf("\n");    
+                
                 /*char str = " input=";
                 for (int j = 0; j < SIZE; ++j) {
                     str += to_string(input[j]) + " ";
