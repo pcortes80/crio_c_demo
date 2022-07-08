@@ -99,6 +99,14 @@ int main(){
                 }                            
                 printf("\n");
 
+                /* put values into FIFO_A */
+                printf("Output=\t");
+                for (j = 1; j < SIZE; ++j) { 
+                    output[j] = output[j-1] + 1;
+                    printf("%d\t", output[j]);
+                }
+                printf("\n");
+
                 /* Change the output for the next loop */
                 output[0] = output[SIZE - 1];
                 if (output[0] > 20000) output[0] = -20000;
