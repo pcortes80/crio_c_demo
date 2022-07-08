@@ -65,8 +65,8 @@ int main(){
             /* initialize elements of FIFO */         
             printf("Output=\t");
             for (i = 0; i < 10; i++) {
-                printf("%d\t", i, output[i]);
                 output[i] = i + 10; /* set element at location i to i + 1 */
+                printf("%d\t", i, output[i]);
             }
             printf("\n");
             sleep(2);
