@@ -45,88 +45,63 @@ int main(){
             /* LEDO = on */
             NiFpga_WriteBool(session, NiFpga_mainFPGA_ControlBool_UserLED0,1);
 
-            int x = 0;
-            while (x < 1)
-            {
-                /*
-                // Read UserSwitches
+            /* Read UserSwitches for 10 seconds */
+            /*
+            int x;
+            while(x < 10){
                 NiFpga_ReadBool(session, NiFpga_mainFPGA_IndicatorBool_UserSwitch0,&userSw0);
                 NiFpga_ReadBool(session, NiFpga_mainFPGA_IndicatorBool_UserSwitch1,&userSw1);
                 NiFpga_ReadBool(session, NiFpga_mainFPGA_IndicatorBool_UserSwitch2,&userSw2);
                 NiFpga_ReadBool(session, NiFpga_mainFPGA_IndicatorBool_UserSwitch3,&userSw3);   
-            
+                
                 printf("iteration = %d\t userSw0 = %d\t userSw1 = %d\t userSw2 = %d\t userSw3 = %d\n", x, (int)userSw0, (int)userSw1, (int)userSw2, (int)userSw3);
-                */
-
-                int i,j;
-                
-                /* initialize elements of FIFO */         
-                printf("Output= ");
-                for (i = 0; i < SIZE; i++) {
-                    printf("%d\t", i, output[i]);
-                    output[i] = i + 1; /* set element at location i to i + 1 */
-                }
-                printf("\n");
-                
-                
-                /* output each array element's value */
-                /*
-                for (j = 0; j < 10; j++ ) {
-                    printf("Output Element[%d] = %d\n", j, output[j] );
-                }
-                */
-
-                // copy FIFO data to FPGA FIFO_A
-                NiFpga_WriteFifoI16(session, 
-                                            NiFpga_mainFPGA_HostToTargetFifoI16_FIFO_A,
-                                            output, 
-                                            SIZE, 
-                                            NiFpga_InfiniteTimeout, 
-                                            NULL);
-
-                // copy FIFO data from the FPGA FIFO_B
-                NiFpga_ReadFifoI16(session, 
-                                            NiFpga_mainFPGA_TargetToHostFifoI16_FIFO_B, 
-                                            input,
-                                            SIZE, 
-                                            NiFpga_InfiniteTimeout, 
-                                            NULL);
-
-                /* print each FIFO element's value */
-                printf("Input=");
-                for (j = 0; j < SIZE; j++ ) {
-                    printf("%d\t", j, input[j] );
-                }                            
-                printf("\n");    
-                
-                /*char str = " input=";
-                for (int j = 0; j < SIZE; ++j) {
-                    str += to_string(input[j]) + " ";
-                }
-                
-                printf("str =%c\t", str);
-
-                str = "output=";
-                for (int j = 0; j < SIZE; ++j) {
-                    str += to_string(output[j]) + " ";
-                }
-                cout << str << endl;
-                */
-                
                 x++;
                 sleep(1);
+            */
+
+            int i,j;
                 
+            /* initialize elements of FIFO */         
+            printf("Output=\t");
+            for (i = 0; i < 10; i++) {
+                printf("%d\t", i, output[i]);
+                output[i] = i + 1; /* set element at location i to i + 1 */
             }
+            printf("\n");
+
+            // copy FIFO data to FPGA FIFO_A
+            NiFpga_WriteFifoI16(session, 
+                                        NiFpga_mainFPGA_HostToTargetFifoI16_FIFO_A,
+                                        output, 
+                                        SIZE, 
+                                        NiFpga_InfiniteTimeout, 
+                                        NULL);
+
+            // copy FIFO data from the FPGA FIFO_B
+            NiFpga_ReadFifoI16(session, 
+                                        NiFpga_mainFPGA_TargetToHostFifoI16_FIFO_B, 
+                                        input,
+                                        SIZE, 
+                                        NiFpga_InfiniteTimeout, 
+                                        NULL);
+
+            /* print each FIFO element's value */
+            printf("Input=\t");
+            for (j = 0; j < SIZE; j++ ) {
+                printf("%d\t", j, input[j] );
+            }                            
+            printf("\n");    
+        }
+
             /* LEDO = off */
             NiFpga_WriteBool(session, NiFpga_mainFPGA_ControlBool_UserLED0,0);
 
             // Close the session to the FPGA VI
             NiFpga_Close(session, 0);
-        }
+    }
         
         // Close the FPGA interface.
         NiFpga_Finalize();
-    }    
      
     // check if anything went wrong
     if (NiFpga_IsError(status)){
