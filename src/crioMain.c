@@ -78,13 +78,7 @@ int main(){
                                
                 printf("\n");
                 */
-                printf("Output=\t");
-                for (j = 1; j < SIZE; ++j) { 
-                    output[j] = output[j-1] + 1;
-                    printf("%d\t", output[j]);
-                }
-                printf("\n");
-
+                
                 // copy FIFO data to FPGA FIFO_A
                 NiFpga_WriteFifoI16(session, 
                                             NiFpga_mainFPGA_HostToTargetFifoI16_FIFO_A,
@@ -104,14 +98,32 @@ int main(){
 
                 /* print each FIFO element's value */
                 printf("Input=\t");
-                for (j = 0; j < SIZE; j++ ) {
+                for (j = 0; j < SIZE; ++j) {
                     printf("%d\t", j, input[j] );
                 }                            
                 printf("\n");
-                //sleep(1);    
+
+
+                printf("Output=\t");
+                for (j = 1; j < SIZE; ++j) { 
+                    output[j] = output[j-1] + 1;
+                    printf("%d\t", output[j]);
+                }
+                printf("\n");
+
+                /* Change the output for the next loop */
+                output[0] = output[SIZE - 1];
+                if (output[0] > 20000) output[0] = -20000;
+                for (j = 1; j < SIZE; ++j) {
+                    output[j] = output[j-1] + 1;
+                }
+
+
+                /* 100 ms delay */
                 sleep(0.100);
 
-            NiFpga_ReadBool(session, NiFpga_mainFPGA_IndicatorBool_UserSwitch0,&userSw0);
+                /* Check if UserSwitch0 is ON */
+                NiFpga_ReadBool(session, NiFpga_mainFPGA_IndicatorBool_UserSwitch0,&userSw0);
 
             } while ((int)userSw0 == 1);
         }
