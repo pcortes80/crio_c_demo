@@ -45,7 +45,7 @@ int main(){
             NiFpga_WriteBool(session, NiFpga_mainFPGA_ControlBool_UserLED0,1);
 
             int x = 0;
-            while (x < 10000)
+            while (x < 10)
             {
                 
                 // Read UserSwitches
@@ -87,7 +87,7 @@ int main(){
                 */
                 
                 x++;
-                sleep(0.1);
+                sleep(1);
                 
             }
             /* LEDO = off */
