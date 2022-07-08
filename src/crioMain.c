@@ -44,6 +44,7 @@ int main(){
 
             /* LEDO = on */
             NiFpga_WriteBool(session, NiFpga_mainFPGA_ControlBool_UserLED0,1);
+            sleep(1);
 
             /* Read UserSwitches for 10 seconds */
             /*
@@ -65,7 +66,7 @@ int main(){
             printf("Output=\t");
             for (i = 0; i < 10; i++) {
                 printf("%d\t", i, output[i]);
-                output[i] = i + 1; /* set element at location i to i + 1 */
+                output[i] = i + 10; /* set element at location i to i + 1 */
             }
             printf("\n");
 
@@ -95,6 +96,10 @@ int main(){
 
             /* LEDO = off */
             NiFpga_WriteBool(session, NiFpga_mainFPGA_ControlBool_UserLED0,0);
+            sleep(1);
+
+            /* Bye */
+            printf("Good bye.");
 
             // Close the session to the FPGA VI
             NiFpga_Close(session, 0);
