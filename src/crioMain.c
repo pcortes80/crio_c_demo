@@ -72,7 +72,7 @@ int main(){
                     printf("%d\t", output[i]);
                 }
                 printf("\n");
-                sleep(1);
+                //sleep(1);
 
                 // copy FIFO data to FPGA FIFO_A
                 NiFpga_WriteFifoI16(session, 
@@ -96,7 +96,7 @@ int main(){
                     printf("%d\t", j, input[j] );
                 }                            
                 printf("\n");
-                //sleep_for(1);    
+                //sleep(1);    
                 sleep(0.100);
 
 
