@@ -66,12 +66,22 @@ int main(){
                 int i,j;
                     
                 /* initialize elements of FIFO_A buffer */         
+                /*
                 printf("Output=\t");
                 for (i = 0; i < SIZE; i++) {
-                    output[i] = i + 10; /* set element at location i to i + 1 */
+                    output[i] = i + 10; // set element at location i to i + 1
                     printf("%d\t", output[i]);
+                    }
+                               
+                printf("\n");
+                */
+                printf("Output=\t");
+                for (j = 1; j < SIZE; ++j) { 
+                    output[j] = output[j-1] + 1;
+                    printf("%d\t", output[j]);
                 }
                 printf("\n");
+
                 //sleep(1);
 
                 // copy FIFO data to FPGA FIFO_A
